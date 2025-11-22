@@ -1,4 +1,4 @@
-import logging
+import multiprocessing as mp
 
 from logger import Logger
 from routeoptimizer import RouteOptimizer
@@ -6,82 +6,28 @@ from utils import print_time
 
 
 @print_time
-def car(logger):
-    input_files = [
-        r'E:\Google\Trasy\Opel Astra',
-    ]
-
-    output_file = r'..\data\Car.gpx'
-
+def process_tracks(logger: Logger, input_directory: str, output_file: str, save_as_tracks=True):
     route_optimizer = RouteOptimizer(logger)
-    route_optimizer.load(input_files)
+    route_optimizer.load(input_directory)
 
-    total_distance = route_optimizer.get_total_distance() / 1000
-    logger.info(F'Total distance: {total_distance:.2f} km')
+    total_distance = route_optimizer.get_total_distance() / 1000.0
+    logger.info(f'Total distance: {total_distance:.2f} km')
 
-    route_optimizer.optimize(5, 10)
-    route_optimizer.save_as_tracks(output_file)
+    route_optimizer.optimize(10.0, 1.0)
 
-
-@print_time
-def bicycle(logger):
-    input_files = [
-        r'E:\Google\Trasy\Rower'
-    ]
-
-    output_file = r'..\data\Rower.gpx'
-
-    route_optimizer = RouteOptimizer(logger)
-    route_optimizer.load(input_files)
-
-    total_distance = route_optimizer.get_total_distance() / 1000
-    logger.info(F'Total distance: {total_distance:.2f} km')
-
-    route_optimizer.optimize(2, 10)
-    route_optimizer.save_as_tracks(output_file)
+    if save_as_tracks:
+        route_optimizer.save_as_tracks(output_file)
+    else:
+        route_optimizer.save_as_segments(output_file)
 
 
-@print_time
-def motorcycle(logger):
-    input_files = [
-        r'E:\Google\Trasy\Motocykl',
-    ]
+def main():
+    logger = Logger(__name__)
+    logger.info(f'Using {mp.cpu_count()} CPUs')
 
-    output_file = r'..\data\Moto.gpx'
-
-    route_optimizer = RouteOptimizer(logger)
-    route_optimizer.load(input_files)
-
-    total_distance = route_optimizer.get_total_distance() / 1000
-    logger.info(F'Total distance: {total_distance:.2f} km')
-
-    route_optimizer.optimize(5, 10)
-    route_optimizer.save_as_tracks(output_file)
-
-
-@print_time
-def offroad(logger):
-    input_files = [
-        r'E:\Google\Trasy\Nissan Patrol',
-    ]
-
-    output_file = r'..\data\Patrol.gpx'
-
-    route_optimizer = RouteOptimizer(logger)
-    route_optimizer.load(input_files)
-
-    total_distance = route_optimizer.get_total_distance() / 1000
-    logger.info(F'Total distance: {total_distance:.2f} km')
-
-    route_optimizer.optimize(5, 10)
-    route_optimizer.save_as_tracks(output_file)
-
+    # process_tracks(logger, r'D:\Projects\travel\data\GPX\Recorded\Bicycle', r'D:\Projects\travel\data\GPX\Recorded\Bicycle.gpx')
+    # process_tracks(logger, r'D:\Projects\travel\data\GPX\Recorded\Car', r'D:\Projects\travel\data\GPX\Recorded\Car.gpx')
+    process_tracks(logger, r'D:\Projects\travel\data\GPX\Recorded\Motorcycle', r'D:\Projects\travel\data\GPX\Recorded\Motorcycle.gpx')
 
 if __name__ == '__main__':
-    logger = Logger()
-    logger.set_level(logging.DEBUG)
-
-    # car(logger)
-    # bicycle(logger)
-    motorcycle(logger)
-    # offroad(logger)
+    main()

@@ -1,1 +1,1 @@
-# gpx-manager
+# GPX Manager

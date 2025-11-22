@@ -2,18 +2,21 @@ import logging
 
 
 class Logger:
-    def __init__(self):
-        handler = logging.StreamHandler()
-        handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S'))
+    def __init__(self, name: str):
+        self.logger = logging.getLogger(name)
 
-        self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(handler)
+        if not logging.getLogger(name).hasHandlers():
+            handler = logging.StreamHandler()
+            handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)5s - %(message)s', datefmt='%Y-%m-%d %I:%M:%S'))
 
-    def set_level(self, level):
-        self.logger.setLevel(level)
+            self.logger.addHandler(handler)
+            self.logger.setLevel(logging.DEBUG)
 
-    def error(self, message):
+    def error(self, message: str) -> None:
         self.logger.error(message)
 
-    def info(self, message):
+    def info(self, message: str) -> None:
         self.logger.info(message)
+
+    def debug(self, message: str) -> None:
+        self.logger.debug(message)
