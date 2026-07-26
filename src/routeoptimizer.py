@@ -15,13 +15,14 @@ class RouteOptimizer:
         self.routes: list[Route] = []
 
     @print_time
-    def load(self, filename: str):
-        if os.path.isdir(filename):
-            for root, dirs, files in os.walk(filename):
-                for file in files:
-                    self.routes.append(Route(self.logger, os.path.join(root, file)))
-        else:
-            self.routes.append(Route(self.logger, filename))
+    def load(self, filenames: list):
+        for filename in filenames:
+            if os.path.isdir(filename):
+                for root, dirs, files in os.walk(filename):
+                    for file in files:
+                        self.routes.append(Route(self.logger, os.path.join(root, file)))
+            else:
+                self.routes.append(Route(self.logger, filename))
 
     @print_time
     def get_total_distance(self):
