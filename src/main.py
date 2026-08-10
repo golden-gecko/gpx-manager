@@ -25,14 +25,15 @@ def main():
     logger = Logger(__name__)
     logger.info(f'Using {mp.cpu_count()} CPUs')
 
-    process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Bicycle'], r'D:\Projects\travel\data\GPX\Visited\Bicycle.gpx')
-    process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Car'], r'D:\Projects\travel\data\GPX\Visited\Car.gpx')
+    # process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Bicycle'], r'D:\Projects\travel\data\GPX\Visited\Bicycle.gpx')
+    # process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Car'], r'D:\Projects\travel\data\GPX\Visited\Car.gpx')
     process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Motorcycle'], r'D:\Projects\travel\data\GPX\Visited\Motorcycle.gpx')
 
-    process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Bałkany'], r'D:\Projects\travel\data\GPX\Visited\Balkans.gpx')
-    process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Czechy'], r'D:\Projects\travel\data\GPX\Visited\Czech.gpx')
-    process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Słowenia'], r'D:\Projects\travel\data\GPX\Visited\Slovenia.gpx')
+    # process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Bałkany'], r'D:\Projects\travel\data\GPX\Visited\Balkans.gpx')
+    # process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Czechy'], r'D:\Projects\travel\data\GPX\Visited\Czech.gpx')
+    # process_tracks(logger, [r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Słowenia'], r'D:\Projects\travel\data\GPX\Visited\Slovenia.gpx')
 
+    """
     paths = [
         r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Słowacja 1',
         r'D:\Projects\travel\data\GPX\Recorded\Motorcycle\BMW F 800 GS\Słowacja 2',
@@ -41,6 +42,7 @@ def main():
     ]
 
     process_tracks(logger, paths, r'D:\Projects\travel\data\GPX\Visited\Slovakia.gpx')
+    """
 
 
 if __name__ == '__main__':
